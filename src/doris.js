@@ -1,8 +1,10 @@
-var Doris = new Object();
+var $ = new Object();
 
 var Seq = require('./seq/core');
+var Tramp = require('./tramp/core');
 
-var traits = function(target) {
+
+var mix = function(target) {
   for (var i = 0; i < arguments.length; i++) {
     var trait = arguments[i];
 
@@ -16,8 +18,8 @@ var traits = function(target) {
   return target;
 };
 
-traits(Doris, Seq);
+mix($, Seq);
+mix($, Tramp);
 
 // Node.js exports
-exports.traits = traits;
-traits(exports, Doris);
+mix(exports, $);
