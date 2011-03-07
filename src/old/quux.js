@@ -1,6 +1,6 @@
 (function() {
    "use strict";
-   
+
    var $ = new doris.Namespace("doris.quux");
 
    /**
@@ -33,7 +33,7 @@
      return {
        functor : f,
        args    : (args) ? args : []
-     }
+     };
    };
 
    /**

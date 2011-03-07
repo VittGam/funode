@@ -2,7 +2,7 @@ var $ = new Object();
 
 var Seq = require('./seq/core');
 var Tramp = require('./tramp/core');
-
+var Fun = require('./fun/core');
 
 var mix = function(target) {
   for (var i = 0; i < arguments.length; i++) {
@@ -20,6 +20,7 @@ var mix = function(target) {
 
 mix($, Seq);
 mix($, Tramp);
+mix($, Fun);
 
 // Node.js exports
 mix(exports, $);
