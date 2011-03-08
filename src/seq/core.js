@@ -1,6 +1,6 @@
 var Seq = new Object;
 
-var sys = require('sys');
+var $ = require('../fun/core');
 
 /*
  * Returns an array representation of an object that has elements, otherwise
@@ -24,6 +24,11 @@ Seq.seq = function(s) {
 Seq.first = function(s) {
   return Seq.seq(s)[0];
 };
+
+/*
+ * Returns the second element in an array-like thing.
+ */
+Seq.second = $.Fun.comp($.Seq.first, $.Seq.rest);
 
 /*
  * Returns an array that is the original array-like `s` minus the first `n` items.
@@ -79,24 +84,44 @@ Seq.iterate = function(times, fn) {
  * `seq` then the original `seq` is simply returned.
  *
  */
-Seq.pad = function(val, sz, seq) {
+Seq.pad = function(sz, val, seq) {
   if (sz <= seq.length) {
     return seq;
   }
 
-  var left = Seq.iterate(Math.floor((sz / seq.length)),
-                         function() {
-                           return val;
-                         });
+  var left = Seq.iterate(Math.floor((sz / seq.length)), constantly(val));
 
-  var right = Seq.iterate(sz - (left.length + seq.length),
-                          function() {
-                            return val;
-                          });
+  var right = Seq.iterate(sz - (left.length + seq.length), constantly(val));
 
   return Seq.cat(left, seq, right);
 };
 
+/*
+ * Mega-range.  Works ike range but can go in different directions.  One-arg specifies
+ * a range of [0,n):
+ *
+ *     $.Seq.range(5);
+ *     //=> [0,1,2,3,4]
+ *
+ * Two-args specify the endpoints [s,e):
+ *
+ *     $.Seq.range(0,4);
+ *     //=> [0,1,2,3]
+ *
+ * In either case, the range go go *backwards*:
+ *
+ *     $.Seq.range(-5);
+ *     //=> [0,-1,-2,-3,-4]
+ *
+ *     $.Seq.range(1,-4);
+ *     //=> [1, 0,-1,-2,-3]
+ *
+ * Given a 3rd numeric argument, `range` will step by that amount:
+ *
+ *     $.Seq.range(0,5,2);
+ *     //=> [0,2,4]
+ *
+ */
 Seq.range = function() {
   var span = function(start,end,step) {
     /**

@@ -1,8 +1,41 @@
 var Fun = new Object;
 
-var sys = require('sys');
-
 var $ = require('../seq/core');
+
+/*
+ * Constant function, or the K-combinator, returns a function that always returns the
+ * original first value.
+ */
+Fun.constantly = function(k) {
+  return function() {
+    return k;
+  };
+};
+
+/*
+ * Function composition.
+ *
+ *    var second = $.Fun.comp($.Seq.first, $.Seq.rest);
+ *    second([1,2,3]);
+ *    //=> 2
+ *
+ */
+Fun.comp = function() {
+  var fns = $.Seq.seq(arguments).reverse();
+
+  return function() {
+    var args = $.Seq.seq(arguments);
+    var ret = fns[0].apply(fns[0], args ? args : []);
+
+    for (var i = 1; i < fns.length; i++) {
+      ret = fns[i](ret);
+    }
+
+    return ret;
+  };
+}
+
+var f = function() { return arguments; };
 
 /**
  *    var r10 = $.Fun.partial($.Seq.range, 10);
