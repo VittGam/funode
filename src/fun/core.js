@@ -21,10 +21,10 @@ Fun.constantly = function(k) {
  *
  */
 Fun.comp = function() {
-  var fns = $.Seq.seq(arguments).reverse();
+  var fns = $.Seq._(arguments).reverse();
 
   return function() {
-    var args = $.Seq.seq(arguments);
+    var args = $.Seq._(arguments);
     var ret = fns[0].apply(fns[0], args ? args : []);
 
     for (var i = 1; i < fns.length; i++) {
@@ -58,13 +58,13 @@ Fun.partial = function(f) {
  *    //=> [ [ 1, 2 ], [ 3, 4 ] ]
  */
 Fun.juxt = function() {
-  var fns = $.Seq.seq(arguments);
+  var fns = $.Seq._(arguments);
 
   return function() {
     var ret = [];
 
     for (var i = 0; i < fns.length; i++) {
-      ret.push(fns[i].apply(fns[i], $.Seq.seq(arguments)));
+      ret.push(fns[i].apply(fns[i], $.Seq._(arguments)));
     }
 
     return ret;

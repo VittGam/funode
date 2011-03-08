@@ -6,7 +6,7 @@ var $ = require('../fun/core');
  * Returns an array representation of an object that has elements, otherwise
  * returns `false`.
  */
-Seq.seq = function(s) {
+Seq._ = function(s) {
   if (typeof s === 'undefined' || s.length === 'undefined') {
     return 'undefined';
   }
@@ -22,13 +22,13 @@ Seq.seq = function(s) {
  * Returns the first element in an array like thing.
  */
 Seq.first = function(s) {
-  return Seq.seq(s)[0];
+  return Seq._(s)[0];
 };
 
 /*
  * Returns the second element in an array-like thing.
  */
-Seq.second = $.Fun.comp($.Seq.first, $.Seq.rest);
+Seq.second = $.Fun.comp($._.first, $._.rest);
 
 /*
  * Returns an array that is the original array-like `s` minus the first `n` items.
@@ -56,7 +56,7 @@ Seq.rest = function(seq) {
  * Concatentates one or more array-like things
  */
 Seq.cat = function() {
-  return Array.prototype.concat.apply([], Seq.seq(arguments));
+  return Array.prototype.concat.apply([], Seq._(arguments));
 };
 
 /*
@@ -68,7 +68,7 @@ Seq.cat = function() {
  */
 Seq.iterate = function(times, fn) {
   var res = [];
-  var args = Seq.drop(2, Seq.seq(arguments));
+  var args = Seq.drop(2, Seq._(arguments));
 
   for (var i=0; i < Math.abs(times); i++) {
     res.push(fn.apply(fn, args));
