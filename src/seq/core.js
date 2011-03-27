@@ -26,11 +26,6 @@ Seq.first = function(s) {
 };
 
 /*
- * Returns the second element in an array-like thing.
- */
-Seq.second = $.Fun.comp($._.first, $._.rest);
-
-/*
  * Returns an array that is the original array-like `s` minus the first `n` items.
  */
 Seq.drop = function(n, s) {

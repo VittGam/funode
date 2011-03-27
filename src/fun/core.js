@@ -12,6 +12,12 @@ Fun.constantly = function(k) {
   };
 };
 
+
+Fun.identity = function(x) {
+  return x;
+};
+
+
 /*
  * Function composition.
  *
@@ -70,6 +76,25 @@ Fun.juxt = function() {
     return ret;
   };
 };
+
+/*
+ * var call = $.Fun.curry(function(f,x) { return f(x) });
+ */
+Fun.curry = function(fn) {
+  var ret = function(){
+    var args = $.Seq._(arguments);
+
+    if (arguments.length >= fn.length) {
+      return fn.apply(fn, args);
+    }
+    else {
+      return ret.apply(ret, args.concat($.Seq._(arguments)));
+    }
+  };
+
+  return ret;
+};
+
 
 // node.js exports
 exports.Fun = Fun;
