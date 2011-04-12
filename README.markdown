@@ -53,17 +53,3 @@ The Funode Way&copy; will include:
 + and so much more...
 
 The next step of course is to print some t-shirts and speak at some conferences, but then the very next step will be to change the world.
-
-## T-Shirt Options
-
-### Funode: exploiting the inherent inefficiencies in nothingness
-
-### Use Funode! Because I/O is always slower.
-
-### Use <span style="text-decoration: line-through;">Erlang!</span> <span style="text-decoration: line-through;">message queues!</span> Funode!
-
-### Node.js is dead.  Long live Node.
-
-Available as polo, for casual Friday.
-
-:f
