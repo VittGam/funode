@@ -1,7 +1,7 @@
 Funode
 =====
 
-*novus ova seclorum*
+*[novus ova seclorum](http://blog.fogus.me/2011/04/12/node-js-is-dead-long-live-node/)*
 
 I give [node.js](http://nodejs.org/) a ribbing from time to time, mostly in response to the propensity of its greatest adherents to view it in an unrealistic light.  My real bias is of course against Javascript.   My problem with Javascript has always been that expertise is defined more in terms of understanding its faults rather than its features.  Node.js needs to be liberated from the shackles of the unwieldy mess that is Javascript.  Node.js should become its own language forged in the embers lit by Crockford.  
 
