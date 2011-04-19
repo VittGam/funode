@@ -95,6 +95,21 @@ Fun.curry = function(fn) {
   return ret;
 };
 
+/*
+ * function lt(x, y) { return x < y };
+ *
+ * [1,2,3,4,5].filter($.Fun.partial(lt, 3));
+ * //=> [4,5]
+ *
+ */
+Fun.partial = function partial( fn /*, args...*/) {
+  var args = $.Seq.rest($.Seq._(arguments));
+
+  return function() {
+    return fn.apply( fn, args.concat($.Seq._(arguments)));
+  };
+};
+
 
 // node.js exports
 exports.Fun = Fun;
